@@ -16,6 +16,8 @@ const products_module_1 = require("./products/products.module");
 const categories_module_1 = require("./categories/categories.module");
 const sales_module_1 = require("./sales/sales.module");
 const storage_module_1 = require("./storage/storage.module");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -24,6 +26,10 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
+            }),
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, '..', 'public'),
+                serveRoot: '/swagger-static',
             }),
             prisma_module_1.PrismaModule,
             auth_module_1.AuthModule,
