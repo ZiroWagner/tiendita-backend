@@ -4,9 +4,17 @@
       {
         "src": "dist/main.js",
         "use": "@vercel/node"
+      },
+      {
+        "src": "dist/main.js",
+        "use": "@vercel/node"
       }
     ],
     "routes": [
+      {
+        "src": "/swagger-static/(.*)",
+        "dest": "/public/$1"
+      },
       {
         "src": "/(.*)",
         "dest": "dist/main.js",
