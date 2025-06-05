@@ -18,6 +18,7 @@ const sales_module_1 = require("./sales/sales.module");
 const storage_module_1 = require("./storage/storage.module");
 const serve_static_1 = require("@nestjs/serve-static");
 const path_1 = require("path");
+const redis_module_1 = require("./redis/redis.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -38,6 +39,7 @@ exports.AppModule = AppModule = __decorate([
             categories_module_1.CategoriesModule,
             sales_module_1.SalesModule,
             storage_module_1.StorageModule,
+            redis_module_1.RedisModule,
         ],
     })
 ], AppModule);

@@ -9,6 +9,7 @@ import { Role } from '@prisma/client';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery, ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { StorageService } from '../storage/storage.service';
+import { RedisService } from '../redis/redis.service';
 import { Express } from 'express';
 
 @ApiTags('products')
@@ -16,7 +17,8 @@ import { Express } from 'express';
 export class ProductsController {
   constructor(
     private readonly productsService: ProductsService,
-    private readonly storageService: StorageService
+    private readonly storageService: StorageService,
+    private readonly redisService: RedisService,
   ) {}
 
   @ApiOperation({ summary: 'Create a new product with image' })
@@ -160,5 +162,16 @@ export class ProductsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.productsService.remove(id);
+  }
+
+  @ApiOperation({ summary: 'Clear product cache' })
+  @ApiResponse({ status: 200, description: 'Cache cleared successfully' })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.ADMIN)
+  @Delete('clear/cache')
+  async clearCache() {
+    await this.redisService.flushAll();
+    return { message: 'Product cache cleared successfully' };
   }
 }

@@ -25,10 +25,12 @@ const client_1 = require("@prisma/client");
 const swagger_1 = require("@nestjs/swagger");
 const platform_express_1 = require("@nestjs/platform-express");
 const storage_service_1 = require("../storage/storage.service");
+const redis_service_1 = require("../redis/redis.service");
 let ProductsController = class ProductsController {
-    constructor(productsService, storageService) {
+    constructor(productsService, storageService, redisService) {
         this.productsService = productsService;
         this.storageService = storageService;
+        this.redisService = redisService;
     }
     async create(createProductDto, file) {
         const product = await this.productsService.create(createProductDto);
@@ -59,6 +61,10 @@ let ProductsController = class ProductsController {
     }
     remove(id) {
         return this.productsService.remove(id);
+    }
+    async clearCache() {
+        await this.redisService.flushAll();
+        return { message: 'Product cache cleared successfully' };
     }
 };
 exports.ProductsController = ProductsController;
@@ -185,10 +191,23 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "remove", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Clear product cache' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Cache cleared successfully' }),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)(client_1.Role.ADMIN),
+    (0, common_1.Delete)('clear/cache'),
+    openapi.ApiResponse({ status: 200 }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], ProductsController.prototype, "clearCache", null);
 exports.ProductsController = ProductsController = __decorate([
     (0, swagger_1.ApiTags)('products'),
     (0, common_1.Controller)('products'),
     __metadata("design:paramtypes", [products_service_1.ProductsService,
-        storage_service_1.StorageService])
+        storage_service_1.StorageService,
+        redis_service_1.RedisService])
 ], ProductsController);
 //# sourceMappingURL=products.controller.js.map

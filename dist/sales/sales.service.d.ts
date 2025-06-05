@@ -8,29 +8,29 @@ export declare class SalesService {
     constructor(prisma: PrismaService, productsService: ProductsService);
     create(userId: string, createSaleDto: CreateSaleDto): Promise<{
         user: {
+            id: string;
             name: string;
             email: string;
-            id: string;
         };
         items: ({
             product: {
+                id: string;
                 name: string;
                 description: string | null;
-                id: string;
-                status: string;
-                createdAt: Date;
-                updatedAt: Date;
                 price: number;
                 stock: number;
                 unit: string | null;
                 image: string | null;
                 categoryId: string;
+                status: string;
+                createdAt: Date;
+                updatedAt: Date;
             };
         } & {
             id: string;
+            price: number;
             createdAt: Date;
             updatedAt: Date;
-            price: number;
             saleId: string;
             productId: string;
             quantity: number;
@@ -41,35 +41,35 @@ export declare class SalesService {
         createdAt: Date;
         updatedAt: Date;
         userId: string;
-        paymentMethod: import(".prisma/client").$Enums.PaymentMethod;
         total: number;
+        paymentMethod: import(".prisma/client").$Enums.PaymentMethod;
         isDeleted: boolean;
     }>;
     findAll(userId?: string, startDate?: Date, endDate?: Date): Promise<({
         user: {
+            id: string;
             name: string;
             email: string;
-            id: string;
         };
         items: ({
             product: {
+                id: string;
                 name: string;
                 description: string | null;
-                id: string;
-                status: string;
-                createdAt: Date;
-                updatedAt: Date;
                 price: number;
                 stock: number;
                 unit: string | null;
                 image: string | null;
                 categoryId: string;
+                status: string;
+                createdAt: Date;
+                updatedAt: Date;
             };
         } & {
             id: string;
+            price: number;
             createdAt: Date;
             updatedAt: Date;
-            price: number;
             saleId: string;
             productId: string;
             quantity: number;
@@ -80,35 +80,35 @@ export declare class SalesService {
         createdAt: Date;
         updatedAt: Date;
         userId: string;
-        paymentMethod: import(".prisma/client").$Enums.PaymentMethod;
         total: number;
+        paymentMethod: import(".prisma/client").$Enums.PaymentMethod;
         isDeleted: boolean;
     })[]>;
     findOne(id: string): Promise<{
         user: {
+            id: string;
             name: string;
             email: string;
-            id: string;
         };
         items: ({
             product: {
+                id: string;
                 name: string;
                 description: string | null;
-                id: string;
-                status: string;
-                createdAt: Date;
-                updatedAt: Date;
                 price: number;
                 stock: number;
                 unit: string | null;
                 image: string | null;
                 categoryId: string;
+                status: string;
+                createdAt: Date;
+                updatedAt: Date;
             };
         } & {
             id: string;
+            price: number;
             createdAt: Date;
             updatedAt: Date;
-            price: number;
             saleId: string;
             productId: string;
             quantity: number;
@@ -119,35 +119,35 @@ export declare class SalesService {
         createdAt: Date;
         updatedAt: Date;
         userId: string;
-        paymentMethod: import(".prisma/client").$Enums.PaymentMethod;
         total: number;
+        paymentMethod: import(".prisma/client").$Enums.PaymentMethod;
         isDeleted: boolean;
     }>;
     update(id: string, updateSaleDto: UpdateSaleDto): Promise<{
         user: {
+            id: string;
             name: string;
             email: string;
-            id: string;
         };
         items: ({
             product: {
+                id: string;
                 name: string;
                 description: string | null;
-                id: string;
-                status: string;
-                createdAt: Date;
-                updatedAt: Date;
                 price: number;
                 stock: number;
                 unit: string | null;
                 image: string | null;
                 categoryId: string;
+                status: string;
+                createdAt: Date;
+                updatedAt: Date;
             };
         } & {
             id: string;
+            price: number;
             createdAt: Date;
             updatedAt: Date;
-            price: number;
             saleId: string;
             productId: string;
             quantity: number;
@@ -158,8 +158,8 @@ export declare class SalesService {
         createdAt: Date;
         updatedAt: Date;
         userId: string;
-        paymentMethod: import(".prisma/client").$Enums.PaymentMethod;
         total: number;
+        paymentMethod: import(".prisma/client").$Enums.PaymentMethod;
         isDeleted: boolean;
     }>;
     remove(id: string): Promise<{
